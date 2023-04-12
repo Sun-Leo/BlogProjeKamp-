@@ -39,7 +39,12 @@ namespace BusinessLayer.Concrete
             return _aboutDal.GetList();
         }
 
-        public void TUpdate(About t)
+		public List<About> TGetListAll(int id)
+		{
+            return _aboutDal.GetListAll(x => x.AboutID == id);
+		}
+
+		public void TUpdate(About t)
         {
             _aboutDal.Update(t);
         }

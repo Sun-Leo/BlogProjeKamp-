@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BusinessLayer.Concrete
 {
-    public class ContactManager : IGenericServices<Contact>
+    public class ContactManager : IContactServices
     {
         private readonly IContactDal _contactDal;
 
@@ -38,7 +38,12 @@ namespace BusinessLayer.Concrete
             return _contactDal.GetList();
         }
 
-        public void TUpdate(Contact t)
+		public List<Contact> TGetListAll(int id)
+		{
+            return _contactDal.GetListAll(x => x.ContactID == id);
+		}
+
+		public void TUpdate(Contact t)
         {
             _contactDal.Update(t);
         }

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BusinessLayer.Concrete
 {
-    public class CommentManager : IGenericServices<Comment>
+    public class CommentManager : ICommentServices
     {
         private readonly ICommentDal _commentDal;
 
@@ -38,7 +38,12 @@ namespace BusinessLayer.Concrete
             return _commentDal.GetList();
         }
 
-        public void TUpdate(Comment t)
+		public List<Comment> TGetListAll(int id)
+		{
+            return _commentDal.GetListAll(x => x.CommentID == id);
+		}
+
+		public void TUpdate(Comment t)
         {
             _commentDal.Update(t);
         }

@@ -9,5 +9,6 @@ namespace BusinessLayer.Abstract
 {
     public interface ICommentServices: IGenericServices<Comment>
     {
+
     }
 }

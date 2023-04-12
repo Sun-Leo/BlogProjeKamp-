@@ -4,12 +4,13 @@ using EntityLayer.Concrete;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace BusinessLayer.Concrete
 {
-    public class BlogManager : IGenericServices<Blog>
+    public class BlogManager :IBlogServices
     {
         private readonly IBlogDal _blogDal;
 
@@ -38,7 +39,17 @@ namespace BusinessLayer.Concrete
             return _blogDal.GetList();
         }
 
-        public void TUpdate(Blog t)
+		public List<Blog> TGetListAll(int id)
+		{
+            return _blogDal.GetListAll(x => x.BlogID == id);
+		}
+
+		public List<Blog> TGetListWithCategory()
+		{
+            return _blogDal.GetListWithCategory();
+		}
+
+		public void TUpdate(Blog t)
         {
             _blogDal.Update(t);
         }

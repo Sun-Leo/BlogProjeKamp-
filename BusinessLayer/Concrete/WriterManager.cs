@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BusinessLayer.Concrete
 {
-    public class WriterManager : IGenericServices<Writer>
+    public class WriterManager : IWriterServices
     {
         private readonly IWriterDal _writerDal;
 
@@ -39,7 +39,12 @@ namespace BusinessLayer.Concrete
             return _writerDal.GetList();
         }
 
-        public void TUpdate(Writer t)
+		public List<Writer> TGetListAll(int id)
+		{
+            return _writerDal.GetListAll(x => x.WriterID == id);
+		}
+
+		public void TUpdate(Writer t)
         {
             _writerDal.Update(t);
         }
