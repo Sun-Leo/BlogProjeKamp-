@@ -3,16 +3,23 @@
 <div class="comment-top">
 	<h4>Yorumlar</h4>
 	<div class="media">
-		@foreach (var item in Model)
+		@if (Model.Count() == 0)
 		{
-			<img src="~/CoreBlogTema/images/t1.jpg" alt="" class="img-fluid" />
-			<div class="media-body">
-				<h5 class="mt-0">@item.CommentUserName</h5>
-				<p>
-					@item.CommentContent
-				</p>
+			<h5>Daha Önce Yorum Yapılmamış. İlk Yorumu Sen Yap...</h5>
+		}
+		else
+		{
+			@foreach (var item in Model)
+			{
+				<img src="~/CoreBlogTema/images/t1.jpg" alt="" class="img-fluid" />
+				<div class="media-body">
+					<h5 class="mt-0">@item.CommentUserName</h5>
+					<p>
+						@item.CommentContent
+					</p>
 
-			</div>
+				</div>
+			}
 		}
 
 	</div>

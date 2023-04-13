@@ -19,6 +19,7 @@ namespace BlogProjeKampı.Controllers
         }
         public IActionResult BlogDetails(int id)
         {
+            ViewBag.i = id;
             var value = _blogServices.TGetListAll(id);
             return View(value);
         }

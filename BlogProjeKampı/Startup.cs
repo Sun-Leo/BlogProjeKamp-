@@ -1,3 +1,7 @@
+using BusinessLayer.Abstract;
+using BusinessLayer.Concrete;
+using DataAccessLayer.Abstract;
+using DataAccessLayer.EntityFramework;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -23,7 +27,22 @@ namespace BlogProjeKampı
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews();
+            services.AddScoped<ICategoryDal,EFCategoryRepository>();
+            services.AddScoped<ICategoryServices,CategoryManager>();
+
+            services.AddScoped<IBlogDal, EFBlogRepository>();
+            services.AddScoped<IBlogServices, BlogManager>();
+
+            services.AddScoped<ICommentDal, EFCommentRepository>();
+            services.AddScoped<ICommentServices, CommentManager>();
+
+            services.AddScoped<IWriterDal, EFWriterRepository>();
+            services.AddScoped<IWriterServices, WriterManager>();
+
+			services.AddScoped<ICityDal, EFCityRepository>();
+			services.AddScoped<ICityServices, CityManager>();
+
+			services.AddControllersWithViews();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

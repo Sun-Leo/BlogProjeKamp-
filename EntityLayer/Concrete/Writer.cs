@@ -16,6 +16,11 @@ namespace EntityLayer.Concrete
         public string WriterImage { get; set; }
         public string WriterMail{ get; set; }
         public string WriterPassword{ get; set; }
+        [Compare("WriterPassword", ErrorMessage ="Şifre Eşleşmiyor. Lütfen Tekrar Deneyin")]
+        public string ConfirmPassword{ get; set; }
         public bool WriterStatus { get; set; }
+
+        public int CityID { get; set; }
+        public City City { get; set; }
     }
 }
