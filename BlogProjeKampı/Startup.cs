@@ -42,6 +42,15 @@ namespace BlogProjeKampı
 			services.AddScoped<ICityDal, EFCityRepository>();
 			services.AddScoped<ICityServices, CityManager>();
 
+            services.AddScoped<INewsLetterDal, EFNewsLetterRepository>();
+            services.AddScoped<INewsLetterServices, NewLetterManager>();
+
+			services.AddScoped<IAboutDal, EFAboutRepository>();
+			services.AddScoped<IAboutServices, AboutManager>();
+
+			services.AddScoped<IContactDal, EFContactRepository>();
+			services.AddScoped<IContactServices, ContactManager>();
+
 			services.AddControllersWithViews();
         }
 
@@ -58,6 +67,7 @@ namespace BlogProjeKampı
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+            app.UseStatusCodePagesWithReExecute("/ErrorPage/Error1", "?code={0}");
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 

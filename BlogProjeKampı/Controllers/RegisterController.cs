@@ -33,9 +33,20 @@ namespace BlogProjeKampı.Controllers
 		[HttpPost]
 		public IActionResult Index(Writer writer)
 		{
-			writer.WriterStatus = true;
-			_writerServices.TAdd(writer);
-			return RedirectToAction("Index", "Blog");
+			if (writer.WriterPassword==writer.ConfirmPassword)
+			{
+				writer.WriterStatus = true;
+				_writerServices.TAdd(writer);
+				return RedirectToAction("Index", "Blog");
+			}
+			else
+			{
+				ModelState.AddModelError("", "Şifreler Uyuşmadı");
+			}
+			return View();
+
+				
+						
 		}
 	}
 }
