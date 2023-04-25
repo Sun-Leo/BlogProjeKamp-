@@ -12,7 +12,7 @@ namespace DataAccessLayer.Concrete
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server=DESKTOP-JKQEAD5;initial catalog=CoreBlog; integrated security=true;");
+            optionsBuilder.UseSqlServer("Server=.\\SQLEXPRESS;initial catalog=CoreBlog; integrated security=true;");
         }
 
         public DbSet<About> Abouts { get; set; }
@@ -21,5 +21,7 @@ namespace DataAccessLayer.Concrete
         public DbSet<Comment> Comments { get; set; }
         public DbSet<Contact> Contacts { get; set; }
         public DbSet<Writer> Writers { get; set; }
+        public DbSet<City> Cities  { get; set; }
+        public DbSet<NewsLetter> NewsLetters  { get; set; }
     }
 }

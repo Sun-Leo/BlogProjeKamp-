@@ -1,5 +1,7 @@
 ﻿using BusinessLayer.Abstract;
+using EntityLayer.Concrete;
 using Microsoft.AspNetCore.Mvc;
+using System;
 
 namespace BlogProjeKampı.Controllers
 {
@@ -16,14 +18,23 @@ namespace BlogProjeKampı.Controllers
 		{
 			return View();
 		}
+		[HttpGet]
 		public PartialViewResult PartialAddComment()
 		{
 			return PartialView();
 		}
-		//public PartialViewResult CommentListByBlog(int id)
-		//{
-		//	var value = _commentServices.TGetListAll(id);
-		//	return PartialView(value);
-		//}
-	}
+		[HttpPost]
+        public PartialViewResult PartialAddComment(Comment comment)
+        {
+			comment.CommentDate=DateTime.Parse(DateTime.Now.ToString());
+			comment.CommentStatus = true;
+			_commentServices.TAdd(comment);
+            return PartialView("Index","Blog");
+        }
+        //public PartialViewResult CommentListByBlog(int id)
+        //{
+        //	var value = _commentServices.TGetListAll(id);
+        //	return PartialView(value);
+        //}
+    }
 }

@@ -1,6 +1,9 @@
 ﻿using BusinessLayer.Abstract;
+using BusinessLayer.ValidationRules;
 using EntityLayer.Concrete;
+using FluentValidation.Results;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,7 +36,9 @@ namespace BlogProjeKampı.Controllers
 		[HttpPost]
 		public IActionResult Index(Writer writer)
 		{
-			if (writer.WriterPassword==writer.ConfirmPassword)
+			WriterValidator wv = new WriterValidator();
+			ValidationResult results = wv.Validate(writer);
+			if (results.IsValid & writer.WriterPassword==writer.ConfirmPassword)
 			{
 				writer.WriterStatus = true;
 				_writerServices.TAdd(writer);
@@ -41,8 +46,28 @@ namespace BlogProjeKampı.Controllers
 			}
 			else
 			{
-				ModelState.AddModelError("", "Şifreler Uyuşmadı");
-			}
+				if(!results.IsValid & writer.WriterPassword != writer.ConfirmPassword)
+				{
+				
+				foreach(var item in results.Errors)
+				{
+					ModelState.AddModelError(item.PropertyName,item.ErrorMessage);
+
+				}
+					ModelState.AddModelError("", "Şifreler uyuşmuyor.");
+
+                }else if (!results.IsValid) 
+				{ 
+					foreach(var item in results.Errors)
+					{
+						ModelState.AddModelError(item.PropertyName, item.ErrorMessage);
+					}
+				}else if(writer.WriterPassword != writer.ConfirmPassword)
+				{
+					ModelState.AddModelError("", "Şifreler uyuşmuyor");
+				}
+            }
+
 			return View();
 
 				

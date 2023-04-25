@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EntityLayer.Concrete;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -15,6 +16,7 @@ namespace BusinessLayer.Abstract
         List<T> TGetList();
         T TGetById(int id);
 		List<T> TGetListAll(int id);
+
 
 
 	}

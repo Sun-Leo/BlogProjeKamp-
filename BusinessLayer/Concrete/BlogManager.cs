@@ -29,7 +29,12 @@ namespace BusinessLayer.Concrete
             _blogDal.Delete(t);
         }
 
-        public Blog TGetById(int id)
+		public List<Blog> TGetBlogListByWriter(int id)
+		{
+            return _blogDal.GetListAll(x => x.WriterID == id);
+		}
+
+		public Blog TGetById(int id)
         {
             return _blogDal.GetById(id);
         }
