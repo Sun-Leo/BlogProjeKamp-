@@ -44,7 +44,12 @@ namespace BusinessLayer.Concrete
             return _writerDal.GetListAll(x => x.WriterID == id);
 		}
 
-		public void TUpdate(Writer t)
+        public List<Writer> TGetListWriterWithCity()
+        {
+            return _writerDal.GetListWriterWithCity();
+        }
+
+        public void TUpdate(Writer t)
         {
             _writerDal.Update(t);
         }

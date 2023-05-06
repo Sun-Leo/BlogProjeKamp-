@@ -89,6 +89,27 @@ namespace DataAccessLayer.Migrations
                     b.ToTable("Blogs");
                 });
 
+            modelBuilder.Entity("EntityLayer.Concrete.BlogRayting", b =>
+                {
+                    b.Property<int>("BlogRaytingID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("BlogID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("BlogRaytingCount")
+                        .HasColumnType("int");
+
+                    b.Property<int>("BlogTotalScore")
+                        .HasColumnType("int");
+
+                    b.HasKey("BlogRaytingID");
+
+                    b.ToTable("BlogRaytings");
+                });
+
             modelBuilder.Entity("EntityLayer.Concrete.Category", b =>
                 {
                     b.Property<int>("CategoryID")
@@ -133,6 +154,9 @@ namespace DataAccessLayer.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("BlogID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("BlogScore")
                         .HasColumnType("int");
 
                     b.Property<string>("CommentContent")
@@ -185,6 +209,36 @@ namespace DataAccessLayer.Migrations
                     b.HasKey("ContactID");
 
                     b.ToTable("Contacts");
+                });
+
+            modelBuilder.Entity("EntityLayer.Concrete.Natification", b =>
+                {
+                    b.Property<int>("NatificationID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("NatificationDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("NatificationDetails")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("NatificationStatus")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("NatificationType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NatificationTypeColor")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NatificationTypeSembol")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("NatificationID");
+
+                    b.ToTable("Natifications");
                 });
 
             modelBuilder.Entity("EntityLayer.Concrete.NewsLetter", b =>

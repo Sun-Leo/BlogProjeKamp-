@@ -9,5 +9,6 @@ namespace BusinessLayer.Abstract
 {
     public interface ICategoryServices: IGenericServices<Category>
     {
+        int TGetCount();
     }
 }

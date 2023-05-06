@@ -39,6 +39,16 @@ namespace BusinessLayer.Concrete
             return _blogDal.GetById(id);
         }
 
+        public int TGetCount()
+        {
+            return _blogDal.GetCount();
+        }
+
+        public List<Blog> TGetLast3Blog()
+        {
+            return _blogDal.GetLast3Blog();
+        }
+
         public List<Blog> TGetList()
         {
             return _blogDal.GetList();
@@ -54,7 +64,17 @@ namespace BusinessLayer.Concrete
             return _blogDal.GetListWithCategory();
 		}
 
-		public void TUpdate(Blog t)
+        public List<Blog> TGetListWithCategoryByWriter(int id)
+        {
+            return _blogDal.GetListWithCategoryByWriter(id);
+        }
+
+        public int TGetWriterBlogCount(int id)
+        {
+            return _blogDal.GetWriterBlogCount(id);
+        }
+
+        public void TUpdate(Blog t)
         {
             _blogDal.Update(t);
         }

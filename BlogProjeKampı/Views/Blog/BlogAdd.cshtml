@@ -1,0 +1,30 @@
+﻿@model Blog
+@{
+    ViewData["Title"] = "BlogAdd";
+    Layout = "~/Views/Shared/Writer_Layout.cshtml";
+}
+
+<h1>Blog Ekle</h1>
+<br />
+@using (Html.BeginForm("BlogAdd", "Blog", FormMethod.Post))
+{
+    @Html.Label("Blog Başlığı")
+    @Html.TextBoxFor(x=>x.BlogTitle,new{ @class="form-control"})
+    @Html.ValidationMessageFor(x=>x.BlogTitle)
+    <br />
+    @Html.Label("Görseli")
+    @Html.TextBoxFor(x=>x.BlogImage,new{ @class="form-control"})
+    @Html.ValidationMessageFor(x=>x.BlogImage)
+    <br />
+    @Html.Label("Küçük Görsel")
+    @Html.TextBoxFor(x=>x.BlogThumbNailImage,new{ @class="form-control"})
+    <br />
+    @Html.Label("Kategori")
+    @Html.DropDownListFor(x=>x.CategoryID,(List<SelectListItem>)ViewBag.cv, new{ @class="form-control"});
+    <br />
+    @Html.Label("Blog İçeriği")
+    @Html.TextAreaFor(x=>x.BlogContent,10,3, new{ @class="form-control"})
+    @Html.ValidationMessageFor(x=>x.BlogContent)
+    <br />
+    <button class="btn btn-outline-primary">Ekle</button>
+}

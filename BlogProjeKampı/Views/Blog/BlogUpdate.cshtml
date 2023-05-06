@@ -1,0 +1,33 @@
+﻿@model Blog
+@{
+    ViewData["Title"] = "BlogUpdate";
+    Layout = "~/Views/Shared/Writer_Layout.cshtml";
+}
+
+<h1>Blog Düzenleme Sayfası</h1>
+<br />
+@using (Html.BeginForm("BlogUpdate", "Blog", FormMethod.Post))
+{
+   
+    @Html.Label("BlogID")
+    @Html.TextBoxFor(x=>x.BlogID, new{ @class="form-control"})
+    <br />
+    @Html.Label("Blog Başlığı")
+    @Html.TextBoxFor(x=>x.BlogTitle, new{ @class="form-control"})
+    <br />
+    @Html.Label("Blog İçeriği")
+    @Html.TextAreaFor(x=>x.BlogContent,15,3, new{ @class="form-control"})
+    <br />
+    @Html.Label("Blog Kategori")
+    @Html.DropDownListFor(x=>x.CategoryID,(List<SelectListItem>)ViewBag.ct,new{ @class="form-control"})
+    <br />
+    @Html.Label("Blog Oluşturma Tarihi")
+    @Html.TextBoxFor(x=>x.BlogCreateDate,new{ @class="form-control"})
+    <br />
+    @Html.Label("Blog Durum")
+    @Html.TextBoxFor(x=>x.BlogStatus, new{ @class="form-control"})
+    <br />
+    <button class="btn btn-outline-primary">Güncelle</button>
+}
+
+

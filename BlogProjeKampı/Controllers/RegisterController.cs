@@ -2,6 +2,7 @@
 using BusinessLayer.ValidationRules;
 using EntityLayer.Concrete;
 using FluentValidation.Results;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -20,7 +21,7 @@ namespace BlogProjeKampı.Controllers
 			_writerServices = writerServices;
 			_cityServices = cityServices;
 		}
-
+		[AllowAnonymous]
 		[HttpGet]
 		public IActionResult Index()
 		{
@@ -33,6 +34,7 @@ namespace BlogProjeKampı.Controllers
 			ViewBag.list1 = list;
 			return View();
 		}
+		[AllowAnonymous]
 		[HttpPost]
 		public IActionResult Index(Writer writer)
 		{

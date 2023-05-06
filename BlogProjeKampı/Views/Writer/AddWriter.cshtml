@@ -1,0 +1,65 @@
+﻿@model AddProfileImage
+@{
+    ViewData["Title"] = "AddWriter";
+    Layout = "~/Views/Shared/Writer_Layout.cshtml";
+}
+
+<form class="form-group" method="post" enctype="multipart/form-data">
+
+    <div class="col-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Yazar Ekle</h4>
+                <p class="card-description"> Bilgiler </p>
+                <br>
+                @Html.HiddenFor(x=>x.WriterID, new{ @class="form-control"})
+
+                <form class="forms-sample">
+                    <div class="form-group">
+                        <label for="exampleInputName1">Adı:</label>
+                        @Html.TextBoxFor(x=>x.WriterName, new{ @class="form-control"})
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail3">Mail Adresi</label>
+                        @Html.TextBoxFor(x=>x.WriterMail, new{ @class="form-control"})
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail3">Şehir</label>
+@*                        @Html.TextBoxFor(x=>x.CityID, new{ @class="form-control"})
+*@                      @Html.DropDownListFor(x=>x.CityID,(List<SelectListItem>)ViewBag.city, new{ @class="form-control"})
+
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword4">Şifreniz</label>
+                        @Html.PasswordFor(x=>x.WriterPassword, new{ @class="form-control"})
+                        @Html.ValidationMessageFor(x=>x.WriterPassword,"", new{ @class="text-danger"})
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword4">Şifrenizi Tekrar Giriniz</label>
+                        @Html.PasswordFor(x=>x.ConfirmPassword, new{ @class="form-control"})
+                        @Html.ValidationMessageFor(x=>x.ConfirmPassword,"", new{ @class="text-danger"})
+
+                    </div>
+
+                    <div class="form-group">
+                        <label>Görsel</label>
+                        <input type="file" name="WriterImage" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="exampleTextarea1">Yazar Hakkında</label>
+                        @Html.TextAreaFor(x=>x.WriterAbout,10,3, new{ @class="form-control"})
+                    </div>
+                    <button type="submit" class="btn btn-gradient-primary mr-2">Kaydet</button>
+
+                    <button class="btn btn-light">Vazgeç</button>
+                </form>
+
+
+
+            </div>
+        </div>
+    </div>
+
+</form>
+

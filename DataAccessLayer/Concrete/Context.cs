@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer.Concrete
 {
-    internal class Context:DbContext
+    public class Context:DbContext
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -23,5 +23,7 @@ namespace DataAccessLayer.Concrete
         public DbSet<Writer> Writers { get; set; }
         public DbSet<City> Cities  { get; set; }
         public DbSet<NewsLetter> NewsLetters  { get; set; }
+        public DbSet<BlogRayting> BlogRaytings  { get; set; }
+        public DbSet<Natification> Natifications  { get; set; }
     }
 }

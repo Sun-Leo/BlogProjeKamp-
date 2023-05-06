@@ -9,5 +9,7 @@ namespace BusinessLayer.Abstract
 {
     public interface IWriterServices: IGenericServices<Writer>
     {
+        List<Writer> TGetListWriterWithCity();
+
     }
 }

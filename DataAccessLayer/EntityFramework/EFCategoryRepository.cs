@@ -1,4 +1,5 @@
 ﻿using DataAccessLayer.Abstract;
+using DataAccessLayer.Concrete;
 using DataAccessLayer.Repositories;
 using EntityLayer.Concrete;
 using System;
@@ -9,7 +10,12 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer.EntityFramework
 {
-    public class EFCategoryRepository:GenericRepository<Category>, ICategoryDal
+    public class EFCategoryRepository : GenericRepository<Category>, ICategoryDal
     {
+        Context context = new Context();
+        public int GetCount()
+        {
+            return context.Categories.Count();
+        }
     }
 }

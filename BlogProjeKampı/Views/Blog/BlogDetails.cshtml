@@ -24,29 +24,10 @@
 						<div class="b-grid-top">
 							<div class="blog_info_left_grid">
 								<a href="single.html">
-									<img src="~/CoreBlogTema/images/b1.jpg" class="img-fluid" alt="">
+									<img src="@item.BlogImage" class="img-fluid" alt="">
 								</a>
 							</div>
-							<div class="blog-info-middle">
-								<ul>
-									<li>
-										<a href="#">
-											<i class="far fa-calendar-alt"></i> @(((DateTime)item.BlogCreateDate).ToString("dd-MMM-yyyy"))
-										</a>
-									</li>
-									<li class="mx-2">
-										<a href="#">
-											<i class="far fa-thumbs-up"></i> 0 Beğeni
-										</a>
-									</li>
-									<li>
-										<a href="#">
-											<i class="far fa-comment"></i> 0 Yorum
-										</a>
-									</li>
-
-								</ul>
-							</div>
+							
 						</div>
 
 						<h3>
@@ -68,7 +49,7 @@
 						<div class="tech-btm">
 							<img src="~/CoreBlogTema/images/banner1.jpg" class="img-fluid" alt="">
 						</div>
-
+						
 						@await Html.PartialAsync("~/Views/NewsLetter/PartialSubscribe.cshtml")
 						
 						@await Component.InvokeAsync("CategoryListBlogDetails")

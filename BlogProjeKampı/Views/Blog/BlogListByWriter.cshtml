@@ -1,0 +1,43 @@
+﻿@model List<Blog>
+@{
+    ViewData["Title"] = "BlogListByWriter";
+    Layout = "~/Views/Shared/Writer_Layout.cshtml";
+}
+
+<h1>Bloglarım</h1>
+<br />
+<table class="table table-bordered">
+    <tr>
+        <th>#</th>
+        <th>Blog Başlığı</th>
+        <th>Kategori</th>
+        <th>Oluşturma Tarihi</th>
+        <th>Durum</th>
+        <th>Sil</th>
+        <th>Güncelle</th>
+    </tr>
+    @foreach(var item in Model)
+    {
+        <tr>
+            <th>@item.BlogID</th>
+            <td>@item.BlogTitle</td>
+            <td style="color:blueviolet">@item.Category.CategoryName</td>
+            <td>@(((DateTime)item.BlogCreateDate).ToString("dd-MMM_yyyy"))</td>
+            <td>@if (item.BlogStatus)
+                {
+                    <span style="color:forestgreen">Aktif</span>
+                }
+                else
+                {
+                    <span style="color:darkred">Pasif</span>
+                }
+
+            </td>
+            <td><a href="#"class="btn btn-outline-dribbble">Sil</a></td>
+            <td><a href="/Blog/BlogUpdate/@item.BlogID"class="btn btn-outline-dark">Güncelle</a></td>   
+@*            <a href="/Blog/DeleteBlog/@item.BlogID" onclick="return confirm('Silmek İstediğine Emin misin?');" class="btn btn-outline-dribbble"></a>
+*@        </tr>
+        
+    }
+</table>
+<a href="/Blog/BlogAdd" class="btn btn-outline-primary">Yeni Blog Oluştur</a>

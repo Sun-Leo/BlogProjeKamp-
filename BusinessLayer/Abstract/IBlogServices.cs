@@ -11,6 +11,12 @@ namespace BusinessLayer.Abstract
     {
 		List<Blog> TGetListWithCategory();
 		List<Blog> TGetBlogListByWriter(int id);
+        List<Blog> TGetLast3Blog();
+        List<Blog> TGetListWithCategoryByWriter(int id);
+        int TGetCount();
+        int TGetWriterBlogCount(int id);
 
-	}
+
+
+    }
 }
