@@ -6,21 +6,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Yazar Paneli</title>
-    <!-- plugins:css -->
     <link rel="stylesheet" href="~/writer/assets/vendors/mdi/css/materialdesignicons.min.css">
     <link rel="stylesheet" href="~/writer/assets/vendors/css/vendor.bundle.base.css">
-    <!-- endinject -->
-    <!-- Plugin css for this page -->
-    <!-- End plugin css for this page -->
-    <!-- inject:css -->
-    <!-- endinject -->
-    <!-- Layout styles -->
     <link rel="stylesheet" href="~/writer/assets/css/style.css">
-    <!-- End layout styles -->
     <link rel="shortcut icon" href="~/writer/assets/images/favicon.ico" />
 </head>
 <body>
@@ -32,6 +23,7 @@
                 <a class="navbar-brand brand-logo-mini" href="index.html"><img src="~/writer/assets/images/SVG.png" alt="logo" /></a>
             </div>
            @await Html.PartialAsync("/Views/Writer/PartialNavbar.cshtml")
+
         </nav>
         <!-- partial -->
         <div class="container-fluid page-body-wrapper">
@@ -41,14 +33,7 @@
             <div class="main-panel">
                 <div class="content-wrapper">
                   
-                    <div class="page-header">
-                        <h3 class="page-title">
-                            <span class="page-title-icon bg-gradient-primary text-white mr-2">
-                                <i class="mdi mdi-home"></i>
-                            </span> Dashboard
-                        </h3>
-                       
-                    </div>
+                  
                <div>
                    @RenderBody()
                </div>

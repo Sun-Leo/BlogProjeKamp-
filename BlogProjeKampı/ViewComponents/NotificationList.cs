@@ -3,11 +3,11 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BlogProjeKampı.ViewComponents
 {
-    public class NatificationList: ViewComponent
+    public class NotificationList:ViewComponent
     {
         private readonly INatificationServices _natificationServices;
 
-        public NatificationList(INatificationServices natificationServices)
+        public NotificationList(INatificationServices natificationServices)
         {
             _natificationServices = natificationServices;
         }

@@ -25,12 +25,12 @@ namespace BlogProjeKampı.Controllers
 		[HttpGet]
 		public IActionResult Index()
 		{
-			List<SelectListItem> list=(from x in _cityServices.TGetList()
-									   select new SelectListItem
-									   {
-										   Text=x.CityName,
-										   Value=x.CityID.ToString()
-									   }).ToList();
+			List<SelectListItem> list = (from x in _cityServices.TGetList()
+										 select new SelectListItem
+										 {
+											 Text = x.CityName,
+											 Value = x.CityID.ToString()
+										 }).ToList();
 			ViewBag.list1 = list;
 			return View();
 		}
@@ -44,7 +44,7 @@ namespace BlogProjeKampı.Controllers
 			{
 				writer.WriterStatus = true;
 				_writerServices.TAdd(writer);
-				return RedirectToAction("Index", "Blog");
+				return RedirectToAction("Index", "Login");
 			}
 			else
 			{

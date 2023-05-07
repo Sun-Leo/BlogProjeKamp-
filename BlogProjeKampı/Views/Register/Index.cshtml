@@ -1,70 +1,71 @@
 ﻿@model Writer
 @{
-    ViewData["Title"] = "Index";
-    Layout = "~/Views/Shared/UserLayout.cshtml";
+    Layout = null;
 }
 
-<script src="~/lib/jquery/dist/jquery.min.js"></script>
-<script src="~/lib/jquery/dist/jquery.js"></script>
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-
-<section class="main-content-w3layouts-agileits">
-	<div class="container">
-		<h3 class="tittle">Yazar Kayıt Sayfası</h3>
-		<div class="inner-sec">
-			<div class="login p-5 bg-light mx-auto mw-100">
-				@using(Html.BeginForm("Index","Register", FormMethod.Post))
-				{
-				<div class="form-row">
-						<div class="col-md-6 mb-3">
-							<label for ="validationCustom01">Adınız Soyadınız</label>
-							@Html.TextBoxFor(x=>x.WriterName, new{ @class="form-control"})
-							@Html.ValidationMessageFor(x=>x.WriterName,"",new{@class="text-danger"})
-						</div>
-						<div class="col-md-6 mb-3">
-							<label for="validationCustom02">Mail Adresiniz </label>
-							@Html.TextBoxFor(x=>x.WriterMail, new{ @class="form-control"})
-							@Html.ValidationMessageFor(x=>x.WriterMail,"",new{@class="text-danger"})
-						</div>
-					</div>
-					<div class="form-row">
-@*						<div class="col-md-6 mb-3">
-							<label for="validationCustom02"> Şehir Yazınız </label>
-							
-							@Html.DropDownListFor(x=>x.CityID, (List<SelectListItem>)ViewBag.list1, new{ @class="form-control"} )
-						</div>*@
-						<div class="form-group col-md-6">
-							<label for="exampleInputPassword1 mb-2">Şifreniz</label>
-							@Html.TextBoxFor(x=>x.WriterPassword, new{ @class="form-control"})
-							@Html.ValidationMessageFor(x=>x.WriterPassword,"",new{@class="text-danger"})
-						</div>
-						<div class="form-group col-md-6">
-							<label for="exampleInputPassword2 mb-2">Şifreyi Onayla</label>
-							@Html.TextBoxFor(x=>x.ConfirmPassword, new{ @class="form-control"})
-							@Html.ValidationMessageFor(x=>x.ConfirmPassword,"",new{@class="text-danger"})
-
-						</div>
-						<div class="form-group col-md-6">
-							<label for="exampleInputPassword2 mb-2">Görsel</label>
-							@Html.TextBoxFor(x=>x.WriterImage, new{ @class="form-control"})
-							@Html.ValidationMessageFor(x=>x.WriterImage,"",new{@class="text-danger"})
-						</div>
-
-					</div>
-					<button type="submit" class="btn btn-primary submit mb-4">Kayıt Ol</button>
-					<div class="text-danger" asp-validation-summary="ModelOnly"></div>
-					<p>
-						<a href="#" id="condition">Şartları okudum, onaylıyorum.</a>
-					</p>
-				}
-
-			</div>
-		</div>
-	</div>
-	<script>
-		$('#condition').click(function(){
-			swal("Kayıt olurken verdiğiniz bilgilerin doğru olduğunu onaylamış olacaksınız. Mail ile gönderilen haber bülteninden istediğiniz zaman çıkış yapabilirsiniz.");
-		});
-	</script>
-</section>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Kayıt Ol</title>
+    <link rel="stylesheet" href="~/writer/assets/vendors/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="~/writer/assets/vendors/css/vendor.bundle.base.css">
+    <link rel="stylesheet" href="~/writer/assets/css/style.css">
+    <link rel="shortcut icon" href="~/writer/assets/images/favicon.ico" />
+</head>
+<body>
+    <div class="container-scroller">
+        <div class="container-fluid page-body-wrapper full-page-wrapper">
+            <div class="content-wrapper d-flex align-items-center auth">
+                <div class="row flex-grow">
+                    <div class="col-lg-4 mx-auto">
+                        <div class="auth-form-light text-left p-5">
+                            <div class="brand-logo">
+                                <img src="~/writer/assets/images/SVG.png">
+                            </div>
+                            <h4>Kayıt Ol</h4>
+                            <h6 class="font-weight-light">Kayıt olmak kolaydır. Sadece birkaç adım sürer..</h6>
+                            <form class="pt-3" method="post">
+                                <div class="form-group">
+                                    <input type="text" class="form-control form-control-lg" id="exampleInputUsername1" name="WriterName" placeholder="Adınız">
+                                </div>
+                                <div class="form-group">
+                                    <input type="email" class="form-control form-control-lg" id="exampleInputEmail1" name="WriterMail" placeholder="Email">
+                                </div>
+                                <div class="form-group">
+                                  @Html.DropDownListFor(x=>x.CityID, (List<SelectListItem>)ViewBag.list1, new{ @class="form-control"})
+                                </div>
+                                <div class="form-group">
+                                    <input type="password" class="form-control form-control-lg" id="exampleInputPassword1" name="WriterPassword" placeholder="Şifreniz">
+                                </div>
+                                <div class="form-group">
+                                    <input type="password" class="form-control form-control-lg" id="exampleInputPassword1" name="ConfirmPassword" placeholder="Şifrenizi Tekrarlayın">
+                                </div>
+                                <div class="mb-4">
+                                    <div class="form-check">
+                                        <label class="form-check-label text-muted">
+                                            <input type="checkbox" class="form-check-input"> Tüm şartları kabul ediyorum
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="mt-3">
+                                    <button class="btn btn-block btn-gradient-primary btn-lg font-weight-medium auth-form-btn">Kayıt Ol</button>
+                                </div>
+                                <div class="text-center mt-4 font-weight-light">
+                                    Hesabım var.. <a href="/Login/Index" class="text-primary">Giriş</a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="~/writer/assets/vendors/js/vendor.bundle.base.js"></script>
+    <script src="~/writer/assets/js/off-canvas.js"></script>
+    <script src="~/writer/assets/js/hoverable-collapse.js"></script>
+    <script src="~/writer/assets/js/misc.js"></script>
+</body>
+</html>
 

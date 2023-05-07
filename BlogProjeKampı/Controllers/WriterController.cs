@@ -33,6 +33,7 @@ namespace BlogProjeKampı.Controllers
 
 		public PartialViewResult PartialNavbar()
 		{
+			
 			return PartialView();
 		}
         public PartialViewResult PartialSidebar()

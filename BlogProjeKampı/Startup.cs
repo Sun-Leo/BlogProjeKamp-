@@ -74,6 +74,9 @@ namespace BlogProjeKampı
             services.AddScoped<INatificationDal, EFNatificationRepository>();
             services.AddScoped<INatificationServices, NatificationManager>();
 
+            services.AddScoped<IMessageDal, EFMessageRepository>();
+            services.AddScoped<IMessageServices, MessageManager>();
+
             services.AddControllersWithViews();
         }
 

@@ -1,0 +1,25 @@
+﻿@model List<Natification>
+@{
+    ViewData["Title"] = "AllNotification";
+    Layout = "~/Views/Shared/Writer_Layout.cshtml";
+}
+
+<h1>Bildirimler</h1>
+<br />
+<table class="table table-info">
+
+    <tr>
+        <th>#</th>
+        <th>Bildirim</th>
+        <th>Tarih</th>
+    </tr>
+    @foreach(var item in Model)
+    {
+        <tr>
+            <td>@item.NatificationID</td>
+            <td>@item.NatificationDetails</td>
+            <td>@item.NatificationDate.ToShortDateString()</td>
+        </tr>
+    }
+</table>
+
