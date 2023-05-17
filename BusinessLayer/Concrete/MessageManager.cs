@@ -34,11 +34,6 @@ namespace BusinessLayer.Concrete
             return _messageDal.GetById(id);
         }
 
-        public List<Message> TGetInboxByWriter(string p)
-        {
-            return _messageDal.GetInboxByWriter(p);
-        }
-
         public List<Message> TGetList()
         {
             return new List<Message>();

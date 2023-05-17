@@ -12,10 +12,6 @@ namespace DataAccessLayer.EntityFramework
 {
     public class EFMessageRepository : GenericRepository<Message>, IMessageDal
     {
-        public List<Message> GetInboxByWriter(string p)
-        {
-            Context context = new Context();
-            return context.Messages.Where(x=>x.Receiver==p).ToList();
-        }
+       
     }
 }

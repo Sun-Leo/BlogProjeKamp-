@@ -30,9 +30,9 @@ namespace BlogProjeKampı
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc(config=>
+            services.AddMvc(config =>
             {
-                var policy= new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
+                var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
                 config.Filters.Add(new AuthorizeFilter(policy));
 
 
@@ -44,11 +44,11 @@ namespace BlogProjeKampı
                 {
                     x.LoginPath = "/Login/Index";
                 }
-                
+
                 );
 
-            services.AddScoped<ICategoryDal,EFCategoryRepository>();
-            services.AddScoped<ICategoryServices,CategoryManager>();
+            services.AddScoped<ICategoryDal, EFCategoryRepository>();
+            services.AddScoped<ICategoryServices, CategoryManager>();
 
             services.AddScoped<IBlogDal, EFBlogRepository>();
             services.AddScoped<IBlogServices, BlogManager>();
@@ -59,23 +59,26 @@ namespace BlogProjeKampı
             services.AddScoped<IWriterDal, EFWriterRepository>();
             services.AddScoped<IWriterServices, WriterManager>();
 
-			services.AddScoped<ICityDal, EFCityRepository>();
-			services.AddScoped<ICityServices, CityManager>();
+            services.AddScoped<ICityDal, EFCityRepository>();
+            services.AddScoped<ICityServices, CityManager>();
 
             services.AddScoped<INewsLetterDal, EFNewsLetterRepository>();
             services.AddScoped<INewsLetterServices, NewLetterManager>();
 
-			services.AddScoped<IAboutDal, EFAboutRepository>();
-			services.AddScoped<IAboutServices, AboutManager>();
+            services.AddScoped<IAboutDal, EFAboutRepository>();
+            services.AddScoped<IAboutServices, AboutManager>();
 
-			services.AddScoped<IContactDal, EFContactRepository>();
-			services.AddScoped<IContactServices, ContactManager>();
+            services.AddScoped<IContactDal, EFContactRepository>();
+            services.AddScoped<IContactServices, ContactManager>();
 
             services.AddScoped<INatificationDal, EFNatificationRepository>();
             services.AddScoped<INatificationServices, NatificationManager>();
 
             services.AddScoped<IMessageDal, EFMessageRepository>();
             services.AddScoped<IMessageServices, MessageManager>();
+
+            services.AddScoped<IMessage2Dal, EFMessage2Repository>();
+            services.AddScoped<IMessage2Services, Message2Manager>();
 
             services.AddControllersWithViews();
         }
@@ -105,6 +108,11 @@ namespace BlogProjeKampı
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapControllerRoute(
+           name: "areas",
+           pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
+             );
+
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");

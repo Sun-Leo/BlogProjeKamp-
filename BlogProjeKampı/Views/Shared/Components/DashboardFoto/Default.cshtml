@@ -1,5 +1,4 @@
-﻿
-@model List<Blog>
+﻿@model List<EntityLayer.Concrete.Blog>
 
 <div class="row">
     <div class="col-12 grid-margin stretch-card">
@@ -20,11 +19,11 @@
                     </div>
                 </div>
                 <div class="row mt-3">
-                    @foreach(var item in Model)
+                    @foreach (var item in Model)
                     {
                         <div class="col-6 pr-1">
                             <img src="@item.BlogImage" class="mb-2 mw-200 w-100 rounded" alt="image">
-                            
+
                         </div>
                     }
                 </div>
@@ -33,4 +32,3 @@
         </div>
     </div>
 </div>
-

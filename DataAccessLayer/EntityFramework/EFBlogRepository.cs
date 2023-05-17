@@ -3,6 +3,7 @@ using DataAccessLayer.Concrete;
 using DataAccessLayer.Repositories;
 using EntityLayer.Concrete;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,8 +16,12 @@ namespace DataAccessLayer.EntityFramework
 	{
 		Context c = new Context();
 
+        public List<Blog> BlogTitleListForExcel()
+        {
+            return c.Blogs.ToList();
+        }
 
-		public List<Blog> GetBlogListByWriter(int id)
+        public List<Blog> GetBlogListByWriter(int id)
 		{
 			return c.Blogs.Include(x=>x.Writer).ToList();
 		}

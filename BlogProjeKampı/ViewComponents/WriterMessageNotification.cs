@@ -5,18 +5,17 @@ namespace BlogProjeKampı.ViewComponents
 {
     public class WriterMessageNotification:ViewComponent
     {
-        private readonly IMessageServices _messageServices;
+        private readonly IMessage2Services _message2Services;
 
-        public WriterMessageNotification(IMessageServices messageServices)
+        public WriterMessageNotification(IMessage2Services message2Services)
         {
-            _messageServices = messageServices;
+            _message2Services = message2Services;
         }
 
         public IViewComponentResult Invoke()
         {
-            string p;
-            p = "gizem@gmail.com";
-            var value = _messageServices.TGetInboxByWriter(p);
+            int id = 1;
+            var value = _message2Services.TGetListMessageWithWriter(id);
             return View(value);
         }
     }

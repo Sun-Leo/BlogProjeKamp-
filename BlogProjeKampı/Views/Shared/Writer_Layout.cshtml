@@ -1,4 +1,4 @@
-﻿
+﻿﻿
 @{
     Layout = null;
 }
@@ -22,7 +22,7 @@
                 <a class="navbar-brand brand-logo" href="index.html"><img src="~/writer/assets/images/SVG.png" alt="logo" /></a>
                 <a class="navbar-brand brand-logo-mini" href="index.html"><img src="~/writer/assets/images/SVG.png" alt="logo" /></a>
             </div>
-           @await Html.PartialAsync("/Views/Writer/PartialNavbar.cshtml")
+            @await Html.PartialAsync("/Views/Writer/PartialNavbar.cshtml")
 
         </nav>
         <!-- partial -->
@@ -32,11 +32,11 @@
             <!-- partial -->
             <div class="main-panel">
                 <div class="content-wrapper">
-                  
-                  
-               <div>
-                   @RenderBody()
-               </div>
+
+
+                    <div>
+                        @RenderBody()
+                    </div>
                 </div>
                 <footer class="footer">
                     <div class="container-fluid clearfix">

@@ -13,10 +13,14 @@ namespace DataAccessLayer.EntityFramework
 {
     public class EFWriterRepository : GenericRepository<Writer>, IWriterDal
     {
+        
+
         public List<Writer> GetListWriterWithCity()
         {
             Context context = new Context();
              return context.Writers.Include(x=>x.City).ToList();
         }
+
+       
     }
 }

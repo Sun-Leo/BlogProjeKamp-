@@ -9,7 +9,6 @@ namespace BusinessLayer.Abstract
 {
     public interface IMessageServices: IGenericServices<Message>
     {
-        List<Message> TGetInboxByWriter(string p);
 
     }
 }

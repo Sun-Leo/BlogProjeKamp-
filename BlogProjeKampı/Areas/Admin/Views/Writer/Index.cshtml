@@ -1,0 +1,42 @@
+﻿@using BlogProjeKampıAPI.DAL
+@model List<Writer>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/Admin_Layout.cshtml";
+}
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>Yazarlarımız</h2>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="index.html">Anasayfa</a>
+            </li>
+            <li class="breadcrumb-item active">
+                <strong>Yazarlarımız</strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-2">
+    </div>
+</div>
+<br />
+<table class="table table-bordered">
+    <tr>
+        <th>#</th>
+        <th>Yazar Adı</th>
+        <th>Yazar Hakkında</th>
+        <th>Yazar Mail</th>
+    </tr>
+    @foreach(var item in Model)
+    {
+        <tr>
+            <td>@item.WriterID</td>
+            <td>@item.WriterName</td>
+            <td>@item.WriterAbout</td>
+            <td>@item.WriterMail</td>
+        </tr>
+    }
+
+</table>
+

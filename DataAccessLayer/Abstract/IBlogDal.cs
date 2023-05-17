@@ -7,11 +7,14 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer.Abstract
 {
+    
     public interface IBlogDal: IGenericDal<Blog>
     {
+        
         List<Blog> GetListWithCategory();
         List<Blog> GetBlogListByWriter(int id);
         List<Blog> GetLast3Blog();
+        List<Blog> BlogTitleListForExcel();
         List<Blog> GetListWithCategoryByWriter(int id);
         int GetCount();
         int GetWriterBlogCount(int id);

@@ -17,8 +17,9 @@ namespace BlogProjeKampı.Controllers
     {       
         private readonly IBlogServices _blogServices;
         private readonly ICategoryServices _categoryServices;
+        Context context = new Context();
 
-		public BlogController(IBlogServices blogServices, ICategoryServices categoryServices)
+        public BlogController(IBlogServices blogServices, ICategoryServices categoryServices)
 		{
 			_blogServices = blogServices;
             _categoryServices = categoryServices;
@@ -37,7 +38,9 @@ namespace BlogProjeKampı.Controllers
         }
         public IActionResult BlogListByWriter()
         {
-           var value= _blogServices.TGetListWithCategoryByWriter(1);
+            var userMail = User.Identity.Name;
+            var writerID=context.Writers.Where(x=>x.WriterMail==userMail).Select(x=>x.WriterID).FirstOrDefault(); 
+           var value= _blogServices.TGetListWithCategoryByWriter(writerID);
             return View(value);
         }
         [HttpGet]
@@ -57,11 +60,13 @@ namespace BlogProjeKampı.Controllers
         {
             BlogValidator bv = new BlogValidator();
             ValidationResult validationResult = bv.Validate(blog);
-            if(validationResult.IsValid)
+            var userMail = User.Identity.Name;
+            var writerID = context.Writers.Where(x => x.WriterMail == userMail).Select(x => x.WriterID).FirstOrDefault();
+            if (validationResult.IsValid)
             {
                 blog.BlogStatus = true;
                 blog.BlogCreateDate=DateTime.Parse(DateTime.Now.ToShortDateString());
-                blog.WriterID = 1;
+                blog.WriterID = writerID;
                 _blogServices.TAdd(blog);
                 return RedirectToAction("BlogListByWriter", "Blog");
             }
@@ -92,7 +97,10 @@ namespace BlogProjeKampı.Controllers
         [HttpPost]
         public IActionResult BlogUpdate(Blog blog)
         {
-            blog.WriterID = 1;
+            
+            var userMail = User.Identity.Name;
+            var writerID = context.Writers.Where(x => x.WriterMail == userMail).Select(x => x.WriterID).FirstOrDefault();
+            blog.WriterID = writerID;
             blog.BlogStatus=true;
             _blogServices.TUpdate(blog);
             return RedirectToAction("BlogListByWriter");

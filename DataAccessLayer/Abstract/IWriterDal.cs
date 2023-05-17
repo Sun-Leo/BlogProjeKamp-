@@ -10,5 +10,6 @@ namespace DataAccessLayer.Abstract
     public interface IWriterDal:IGenericDal<Writer>
     {
         List<Writer> GetListWriterWithCity();
+       
     }
 }

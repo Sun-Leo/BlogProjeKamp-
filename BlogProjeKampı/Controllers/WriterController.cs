@@ -25,7 +25,7 @@ namespace BlogProjeKampı.Controllers
             _writerServices = writerServices;
 			_cityServices = cityServices;	
         }
-
+		[Authorize]
         public IActionResult Index()
 		{
 			return View();
@@ -50,7 +50,10 @@ namespace BlogProjeKampı.Controllers
 			//								 Value = x.CityID.ToString()
 			//							 }).ToList();
 			//ViewBag.city = list;
-			var value = _writerServices.TGetById(1);
+			Context context = new Context();
+			var userMail = User.Identity.Name;
+			var writerID= context.Writers.Where(x=>x.WriterMail==userMail).Select(x=>x.WriterID).FirstOrDefault();
+			var value = _writerServices.TGetById(writerID);
 			return View(value);
 		}
 		[HttpPost]

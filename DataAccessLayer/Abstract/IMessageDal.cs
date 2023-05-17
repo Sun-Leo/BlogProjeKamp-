@@ -9,6 +9,5 @@ namespace DataAccessLayer.Abstract
 {
     public interface IMessageDal: IGenericDal<Message>
     {
-        List<Message> GetInboxByWriter(string p);
     }
 }

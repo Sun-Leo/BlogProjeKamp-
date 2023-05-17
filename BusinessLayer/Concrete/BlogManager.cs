@@ -19,6 +19,11 @@ namespace BusinessLayer.Concrete
             _blogDal = blogDal;
         }
 
+        public List<Blog> BlogTitleListForExcel()
+        {
+            return _blogDal.BlogTitleListForExcel();
+        }
+
         public void TAdd(Blog t)
         {
             _blogDal.Add(t);
