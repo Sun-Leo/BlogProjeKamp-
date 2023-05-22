@@ -18,6 +18,11 @@ namespace BusinessLayer.Concrete
             _message2Dal = message2Dal;
         }
 
+        public List<Message2> GetSendBoxListByWriter(int id)
+        {
+            return _message2Dal.GetSendBoxListByWriter(id);
+        }
+
         public void TAdd(Message2 t)
         {
             _message2Dal.Add(t);

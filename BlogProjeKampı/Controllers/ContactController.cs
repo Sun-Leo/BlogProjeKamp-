@@ -1,10 +1,12 @@
 ﻿using BusinessLayer.Abstract;
 using EntityLayer.Concrete;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 
 namespace BlogProjeKampı.Controllers
 {
+	[AllowAnonymous]
 	public class ContactController : Controller
 	{
 		private readonly IContactServices _contactServices;

@@ -16,7 +16,8 @@ namespace DataAccessLayer.EntityFramework
 	{
 		Context c = new Context();
 
-        public List<Blog> BlogTitleListForExcel()
+
+		public List<Blog> BlogTitleListForExcel()
         {
             return c.Blogs.ToList();
         }
@@ -46,9 +47,14 @@ namespace DataAccessLayer.EntityFramework
             return c.Blogs.Include(x=>x.Category).Where(x=>x.WriterID == id).ToList();
         }
 
-        public int GetWriterBlogCount(int id)
+        public  int GetWriterBlogCount(int id)
         {
-            return c.Blogs.Where(x=>x.WriterID==1).Count();
+
+            AppUser appUser = new AppUser();
+            var writerId = c.Writers.Where(x => x.WriterMail == appUser.Email).Select(x => x.WriterID).FirstOrDefault();
+            return c.Blogs.Where(x => x.WriterID == writerId).Count();
         }
-    }
+
+		
+	}
 }

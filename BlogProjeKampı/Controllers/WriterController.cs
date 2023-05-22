@@ -1,16 +1,20 @@
 ﻿using BlogProjeKampı.Models;
 using BusinessLayer.Abstract;
+using BusinessLayer.Concrete;
 using BusinessLayer.ValidationRules;
 using DataAccessLayer.Concrete;
+using DataAccessLayer.EntityFramework;
 using EntityLayer.Concrete;
 using FluentValidation.Results;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace BlogProjeKampı.Controllers
 {
@@ -19,29 +23,36 @@ namespace BlogProjeKampı.Controllers
 	{
 		private readonly IWriterServices _writerServices;
 		private readonly ICityServices _cityServices;
+		private readonly UserManager<AppUser> _userManager;
+		public WriterController(IWriterServices writerServices, ICityServices cityServices, UserManager<AppUser> userManager)
+		{
+			_writerServices = writerServices;
+			_cityServices = cityServices;
+			_userManager = userManager;
+		}
 
-        public WriterController(IWriterServices writerServices, ICityServices cityServices)
-        {
-            _writerServices = writerServices;
-			_cityServices = cityServices;	
-        }
+
+
 		[Authorize]
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
 		{
-			return View();
+           var value=await _userManager.FindByNameAsync(User.Identity.Name);
+			var name1 = value.NameSurname;
+			ViewBag.Name1 = name1;
+            return View();
 		}
 
-		public PartialViewResult PartialNavbar()
-		{
+		//public PartialViewResult PartialNavbar()
+		//{
 			
-			return PartialView();
-		}
+  //          return PartialView();
+		//}
         public PartialViewResult PartialSidebar()
         {
             return PartialView();
         }
 		[HttpGet]
-		public IActionResult WriterEditProfile()
+		public async Task<IActionResult> WriterEditProfile()
 		{
 			//List<SelectListItem> list = (from x in _cityServices.TGetList()
 			//							 select new SelectListItem
@@ -50,40 +61,31 @@ namespace BlogProjeKampı.Controllers
 			//								 Value = x.CityID.ToString()
 			//							 }).ToList();
 			//ViewBag.city = list;
-			Context context = new Context();
-			var userMail = User.Identity.Name;
-			var writerID= context.Writers.Where(x=>x.WriterMail==userMail).Select(x=>x.WriterID).FirstOrDefault();
-			var value = _writerServices.TGetById(writerID);
-			return View(value);
+			//Context context = new Context();
+			//UserManager userManager = new UserManager(new EFUserRepository());
+			//var userName = User.Identity.Name;
+			//var userMail= context.Users.Where(x=>x.UserName == userName).Select(x=>x.Email).FirstOrDefault();
+			//var id= context.Users.Where(x=>x.Email==userMail).Select(x=>x.Id).FirstOrDefault();
+			//var value = userManager.TGetById(id);
+			var value= await _userManager.FindByNameAsync(User.Identity.Name);
+			UserUpdateViewModel user= new UserUpdateViewModel();
+			user.namesurname = value.NameSurname;
+			user.mail = value.Email;
+			user.username = value.UserName;
+			user.image = value.ImageUrl;
+			return View(user);
 		}
 		[HttpPost]
-		public IActionResult WriterEditProfile(Writer writer)
+		public async Task<IActionResult> WriterEditProfile(UserUpdateViewModel userUpdate)
 		{
-
-			WriterValidator validations = new WriterValidator();
-			ValidationResult result = validations.Validate(writer);
-			if(result.IsValid & writer.WriterPassword==writer.ConfirmPassword)
-			{
-				_writerServices.TUpdate(writer);
-				return RedirectToAction("Index", "Dashboard");
-			}
-			else
-			{
-				if(!result.IsValid)
-				{
-                    foreach (var item in result.Errors)
-                    {
-                        ModelState.AddModelError(item.PropertyName, item.ErrorMessage);
-                    }
-                }
-
-                else if (writer.WriterPassword != writer.ConfirmPassword)
-                {
-                    ModelState.AddModelError("", "Şifreler Uyuşmadı");
-                }
-                
-            }
-			return View();
+			var value= await _userManager.FindByNameAsync(User.Identity.Name);
+			userUpdate.namesurname = value.NameSurname;
+			userUpdate.mail = value.Email;
+			userUpdate.image = value.ImageUrl;
+			userUpdate.username = value.UserName;
+			value.PasswordHash = _userManager.PasswordHasher.HashPassword(value, userUpdate.password);
+			var result = await _userManager.UpdateAsync(value);
+			return RedirectToAction("Index","Dashboard");
         }
 		[HttpGet]
 		public IActionResult AddWriter()

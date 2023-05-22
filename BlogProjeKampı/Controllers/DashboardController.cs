@@ -1,5 +1,7 @@
 ﻿using BusinessLayer.Abstract;
+using DataAccessLayer.Concrete;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 
 namespace BlogProjeKampı.Controllers
 {
@@ -13,11 +15,14 @@ namespace BlogProjeKampı.Controllers
             _blogServices = blogServices;
             _categoryServices = categoryServices;
         }
-
-        public IActionResult Index()
+        Context c = new Context();
+        public IActionResult Index(int id)
         {
+            var userName = User.Identity.Name;
+            var userMail = c.Users.Where(x => x.UserName == userName).Select(x => x.Email).FirstOrDefault();
+            var writerId = c.Writers.Where(x => x.WriterMail == userMail).Select(x => x.WriterID).FirstOrDefault();
             ViewBag.v1 = _blogServices.TGetCount();
-            ViewBag.v2 = _blogServices.TGetWriterBlogCount(1);
+            ViewBag.v2 = c.Writers.Where(x=>x.WriterID == writerId).Select(x=>x.Blogs.Count).FirstOrDefault();
             ViewBag.v3 = _categoryServices.TGetCount();
             return View();
         }

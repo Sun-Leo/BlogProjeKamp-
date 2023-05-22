@@ -1,12 +1,27 @@
-﻿@using EntityLayer.Concrete
+﻿@using BlogProjeKampıAPI.DAL
 @model List<Category>
 
 
 @{
-    Layout = null;
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/Admin_Layout.cshtml";
 }
-<link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
-<link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>Kategoriler</h2>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="index.html">Anasayfa</a>
+            </li>
+            <li class="breadcrumb-item active">
+                <strong>Kategoriler</strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-2">
+    </div>
+</div>
 <br />
 <div class="container"> 
 <table class="table table-bordered">
@@ -15,8 +30,8 @@
         <th>ID</th>
         <th>Kategori Adı</th>
         <th>Kategori Durumu</th>
-        <th>Detaylar</th>
         <th>Sil</th>
+        <th>Düzenle</th>
     </tr>
     @foreach(var item in Model)
     {
@@ -24,12 +39,12 @@
             <td>@item.CategoryID</td>
             <td>@item.CategoryName</td>
             <td>@item.CategoryStatus</td>
-            <td><a href="#" class="btn btn-outline-warning">Detaylar</a></td>
-            <td><a href="#" class="btn btn-outline-danger">Sil</a></td>
+            <td><a href="/Category/DeleteCategory/@item.CategoryID" class="btn btn-outline-warning">Sil</a></td>
+            <td><a href="/Category/EditCategory/@item.CategoryID" class="btn btn-outline-danger">Düzenle</a></td>
         </tr>
     }
 
 </table>
-    <a href="#" class="btn btn-outline-primary">Ekle</a>
+    <a href="/Category/AddCategory/" class="btn btn-outline-primary">Ekle</a>
 </div>
 

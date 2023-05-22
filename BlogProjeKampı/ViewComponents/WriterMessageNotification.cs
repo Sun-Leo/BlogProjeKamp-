@@ -1,5 +1,7 @@
 ﻿using BusinessLayer.Abstract;
+using DataAccessLayer.Concrete;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 
 namespace BlogProjeKampı.ViewComponents
 {
@@ -11,11 +13,15 @@ namespace BlogProjeKampı.ViewComponents
         {
             _message2Services = message2Services;
         }
+        Context context = new Context();
 
         public IViewComponentResult Invoke()
         {
-            int id = 1;
-            var value = _message2Services.TGetListMessageWithWriter(id);
+
+            var userName = User.Identity.Name;
+            var userMail = context.Users.Where(x => x.UserName == userName).Select(x => x.Email).FirstOrDefault();
+            var writerId = context.Writers.Where(x => x.WriterMail == userMail).Select(x => x.WriterID).FirstOrDefault();
+            var value = _message2Services.TGetListMessageWithWriter(writerId);
             return View(value);
         }
     }

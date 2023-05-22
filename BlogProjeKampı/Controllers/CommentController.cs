@@ -1,10 +1,13 @@
 ﻿using BusinessLayer.Abstract;
 using EntityLayer.Concrete;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Threading.Tasks;
 
 namespace BlogProjeKampı.Controllers
 {
+	[AllowAnonymous]
 	public class CommentController : Controller
 	{
 		private readonly ICommentServices _commentServices;
@@ -24,17 +27,17 @@ namespace BlogProjeKampı.Controllers
 			return PartialView();
 		}
 		[HttpPost]
-        public PartialViewResult PartialAddComment(Comment comment)
-        {
-			comment.CommentDate=DateTime.Parse(DateTime.Now.ToString());
+		public IActionResult PartialAddComment(Comment comment)
+		{
+			comment.CommentDate = DateTime.Parse(DateTime.Now.ToString());
 			comment.CommentStatus = true;
 			_commentServices.TAdd(comment);
-            return PartialView("Index","Blog");
-        }
-        //public PartialViewResult CommentListByBlog(int id)
-        //{
-        //	var value = _commentServices.TGetListAll(id);
-        //	return PartialView(value);
-        //}
-    }
+			return RedirectToAction("Index", "Blog");
+		}
+		//public PartialViewResult CommentListByBlog(int id)
+		//{
+		//	var value = _commentServices.TGetListAll(id);
+		//	return PartialView(value);
+		//}
+	}
 }

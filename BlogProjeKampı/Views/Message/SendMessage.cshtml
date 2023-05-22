@@ -1,0 +1,24 @@
+﻿@using EntityLayer.Concrete
+@model Message2
+@{
+    ViewData["Title"] = "SendMessage";
+    Layout = "~/Views/Shared/Writer_Layout.cshtml";
+}
+
+<h1>Mesaj Gönder</h1>
+<br />
+<div class="container">
+    <form method="post">
+        <label>Konu</label>
+        @Html.TextBoxFor(x=>x.Subject, new{ @class="form-control"})
+        <br />
+        <label>Alıcı</label>
+        @Html.TextBoxFor(x=>x.ReceiverID, new{ @class="form-control"})
+        <br />
+        <label>Mesajınız</label>
+        @Html.TextAreaFor(x=>x.MessageDetails,10,3, new{ @class="form-control"})
+        <br />
+        <button class="btn btn-outline-success">Mesajı Gönder</button>
+    </form>
+</div>
+

@@ -1,0 +1,38 @@
+﻿@using BlogProjeKampıAPI.DAL
+@model Writer
+
+@{
+    ViewData["Title"] = "AddWriter";
+    Layout = "~/Views/Shared/Admin_Layout.cshtml";
+}
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>Yazar Ekle</h2>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="index.html">Anasayfa</a>
+            </li>
+            <li class="breadcrumb-item active">
+                <strong>Yazar Ekle</strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-2">
+    </div>
+</div>
+<br />
+<form method="post">
+    <label>Yazar Adı</label>
+    <input type="text" class="form-control" name="WriterName" />
+    <br />
+    <label>Yazar Hakkında</label>
+    <input type="text" class="form-control" name="WriterAbout" />
+    <br />
+    <label>Yazar Mail</label>
+    <input type="email" class="form-control" name="WriterMail" />
+    <br />
+    <button class="btn btn-outline-success">Ekle</button>
+
+</form>
+

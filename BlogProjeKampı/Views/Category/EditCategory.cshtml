@@ -1,0 +1,37 @@
+﻿@using BlogProjeKampıAPI.DAL
+@model Category
+@{
+    ViewData["Title"] = "EditCategory";
+    Layout = "~/Views/Shared/Admin_Layout.cshtml";
+}
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>Güncelle Güncelleme</h2>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="index.html">Anasayfa</a>
+            </li>
+            <li class="breadcrumb-item active">
+                <strong>Kategori Güncelleme</strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-2">
+    </div>
+</div>
+<br />
+<form method="post">
+    <label>Kategori ID</label>
+    @Html.TextBoxFor(x=>x.CategoryID, new{ @class="form-control"})
+    <br />
+    <label>Kategori Adı</label>
+    @Html.TextBoxFor(x=>x.CategoryName, new{ @class="form-control"})
+    <br />
+    <label>Kategori Durum</label>
+    @Html.TextBoxFor(x=>x.CategoryStatus, new{ @class="form-control"})
+    <br />
+    <button class="btn btn-outline-primary">Güncelle</button>
+</form>
+
+

@@ -27,6 +27,8 @@
         <th>Yazar Adı</th>
         <th>Yazar Hakkında</th>
         <th>Yazar Mail</th>
+        <th>Sil</th>
+        <th>Düzenle</th>
     </tr>
     @foreach(var item in Model)
     {
@@ -35,8 +37,11 @@
             <td>@item.WriterName</td>
             <td>@item.WriterAbout</td>
             <td>@item.WriterMail</td>
+            <td><a href="/Admin/Writer/DeleteWriter/@item.WriterID" class="btn btn-outline-danger">Sil</a></td>
+            <td><a href="/Admin/Writer/EditWriter/@item.WriterID" class="btn btn-outline-success">Düzenle</a></td>
         </tr>
     }
 
 </table>
+<a href="/Admin/Writer/AddWriter/" class="btn btn-outline-primary">Yazar Ekle</a>
 

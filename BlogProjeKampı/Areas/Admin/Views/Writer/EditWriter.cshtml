@@ -1,0 +1,39 @@
+﻿@using BlogProjeKampıAPI.DAL
+@model Writer
+@{
+    ViewData["Title"] = "EditWriter";
+    Layout = "~/Views/Shared/Admin_Layout.cshtml";
+}
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>Yazar Güncelleme</h2>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="index.html">Anasayfa</a>
+            </li>
+            <li class="breadcrumb-item active">
+                <strong>Yazar Güncelleme</strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-2">
+    </div>
+</div>
+<br />
+<form method="post">
+    <label>Yazar ID</label>
+    @Html.TextBoxFor(x=>x.WriterID, new{ @class="form-control"})
+    <br />
+    <label>Yazar Adı</label>
+    @Html.TextBoxFor(x=>x.WriterName, new{ @class="form-control"})
+    <br />
+    <label>Yazar Hakkında</label>
+    @Html.TextAreaFor(x=>x.WriterAbout, new{ @class="form-control"})
+    <br />
+    <label>Yazar Mail</label>
+    @Html.TextBoxFor(x=>x.WriterMail, new{ @class="form-control"})
+    <br />
+    <button class="btn btn-outline-primary">Güncelle</button>
+</form>
+

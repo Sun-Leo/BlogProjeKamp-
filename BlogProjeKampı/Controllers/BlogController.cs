@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 
 namespace BlogProjeKampı.Controllers
 {
@@ -24,12 +25,19 @@ namespace BlogProjeKampı.Controllers
 			_blogServices = blogServices;
             _categoryServices = categoryServices;
 		}
-
+        [AllowAnonymous]
 		public IActionResult Index()
         {
+            //var userName = User.Identity.Name;
+            //var userMail = context.Users.Where(x => x.UserName == userName).Select(x => x.Email).FirstOrDefault();
+            //var writerId = context.Writers.Where(x => x.WriterMail == userMail).Select(x => x.WriterID).FirstOrDefault();
+            //var name= context.Writers.Where(x=>x.WriterID==writerId).Select(x=>x.WriterName).FirstOrDefault();
+            //ViewBag.name=name;
+
             var value = _blogServices.TGetListWithCategory();
             return View(value);
         }
+        [AllowAnonymous]
         public IActionResult BlogDetails(int id)
         {
             ViewBag.i = id;
@@ -38,9 +46,12 @@ namespace BlogProjeKampı.Controllers
         }
         public IActionResult BlogListByWriter()
         {
-            var userMail = User.Identity.Name;
-            var writerID=context.Writers.Where(x=>x.WriterMail==userMail).Select(x=>x.WriterID).FirstOrDefault(); 
-           var value= _blogServices.TGetListWithCategoryByWriter(writerID);
+            var userName = User.Identity.Name;
+            var userMail= context.Users.Where(x=>x.UserName == userName).Select(x=>x.Email).FirstOrDefault();
+            var writerId= context.Writers.Where(x=>x.WriterMail==userMail).Select(x=>x.WriterID).FirstOrDefault();
+            
+            //var writerID=context.Writers.Where(x=>x.WriterMail==userMail).Select(x=>x.WriterID).FirstOrDefault(); 
+           var value= _blogServices.TGetListWithCategoryByWriter(writerId);
             return View(value);
         }
         [HttpGet]
@@ -60,13 +71,14 @@ namespace BlogProjeKampı.Controllers
         {
             BlogValidator bv = new BlogValidator();
             ValidationResult validationResult = bv.Validate(blog);
-            var userMail = User.Identity.Name;
-            var writerID = context.Writers.Where(x => x.WriterMail == userMail).Select(x => x.WriterID).FirstOrDefault();
+            var userName = User.Identity.Name;
+            var userMail = context.Users.Where(x => x.UserName == userName).Select(x => x.Email).FirstOrDefault();
+            var writerId = context.Writers.Where(x => x.WriterMail == userMail).Select(x => x.WriterID).FirstOrDefault();
             if (validationResult.IsValid)
             {
                 blog.BlogStatus = true;
                 blog.BlogCreateDate=DateTime.Parse(DateTime.Now.ToShortDateString());
-                blog.WriterID = writerID;
+                blog.WriterID = writerId;
                 _blogServices.TAdd(blog);
                 return RedirectToAction("BlogListByWriter", "Blog");
             }
@@ -97,10 +109,11 @@ namespace BlogProjeKampı.Controllers
         [HttpPost]
         public IActionResult BlogUpdate(Blog blog)
         {
-            
-            var userMail = User.Identity.Name;
-            var writerID = context.Writers.Where(x => x.WriterMail == userMail).Select(x => x.WriterID).FirstOrDefault();
-            blog.WriterID = writerID;
+
+            var userName = User.Identity.Name;
+            var userMail = context.Users.Where(x => x.UserName == userName).Select(x => x.Email).FirstOrDefault();
+            var writerId = context.Writers.Where(x => x.WriterMail == userMail).Select(x => x.WriterID).FirstOrDefault();
+            blog.WriterID = writerId;
             blog.BlogStatus=true;
             _blogServices.TUpdate(blog);
             return RedirectToAction("BlogListByWriter");

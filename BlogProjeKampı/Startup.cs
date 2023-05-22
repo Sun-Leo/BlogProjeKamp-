@@ -1,7 +1,9 @@
 using BusinessLayer.Abstract;
 using BusinessLayer.Concrete;
 using DataAccessLayer.Abstract;
+using DataAccessLayer.Concrete;
 using DataAccessLayer.EntityFramework;
+using EntityLayer.Concrete;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
@@ -38,14 +40,22 @@ namespace BlogProjeKampı
 
             });
             services.AddMvc();
-            services.AddAuthentication(
+            services.AddDbContext<Context>();
+            services.AddIdentity<AppUser, AppRole>().AddEntityFrameworkStores<Context>();
 
-                CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(x =>
-                {
-                    x.LoginPath = "/Login/Index";
-                }
+            services. ConfigureApplicationCookie(option =>
+            {
+                option.ExpireTimeSpan = TimeSpan.FromMinutes(15);
+                option.LoginPath = "/Admin/LoginAdmin/Index/";
+            });
+            //services.AddAuthentication(
 
-                );
+            //    CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(x =>
+            //    {
+            //        x.LoginPath = "/Admin/LoginAdmin/Index";
+            //    }
+
+            //    );
 
             services.AddScoped<ICategoryDal, EFCategoryRepository>();
             services.AddScoped<ICategoryServices, CategoryManager>();

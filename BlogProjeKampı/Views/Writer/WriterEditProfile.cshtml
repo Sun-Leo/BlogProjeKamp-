@@ -1,5 +1,5 @@
-﻿﻿@using EntityLayer.Concrete
-@model Writer
+﻿@model BlogProjeKampı.Models.UserUpdateViewModel
+
 @{
     ViewData["Title"] = "WriterEditProfile";
     Layout = "~/Views/Shared/Writer_Layout.cshtml";
@@ -7,7 +7,7 @@
 @*<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src="~/js/site.js"></script>*@
 
-@using(Html.BeginForm("WriterEditProfile", "Writer", FormMethod.Post))
+@using(Html.BeginForm("WriterEditProfile","Writer",FormMethod.Post))
 {
     <div class="col-12 grid-margin stretch-card">
         <div class="card">
@@ -15,37 +15,27 @@
                 <h4 class="card-title">Yazar Profil</h4>
                 <p class="card-description"> Bilgiler </p>
                 <br>
-                @Html.HiddenFor(x=>x.WriterID, new{ @class="form-control"})
-
-                <form class="forms-sample">
+               
                     <div class="form-group">
                         <label for="exampleInputName1">Adı:</label>
-                        @Html.TextBoxFor(x=>x.WriterName, new{ @class="form-control"})
+                        <input type="text" asp-for="@Model.namesurname"  class="form-control">
                     </div>
+                <div class="form-group">
+                    <label for="exampleInputName1">Kullanıcı Adı:</label>
+                    <input type="text" asp-for="@Model.username"  class="form-control">
+                </div>
                     <div class="form-group">
                         <label for="exampleInputEmail3">Mail Adresi</label>
-                        @Html.TextBoxFor(x=>x.WriterMail, new{ @class="form-control"})
+                        <input type="text" asp-for="@Model.mail"  class="form-control">
                     </div>
-                    <div class="form-group">
-                        <label for="exampleInputEmail3">Şehir</label>
-                        @Html.TextBoxFor(x=>x.CityID, new{ @class="form-control"})
-@*                        @Html.DropDownListFor(x=>x.CityID,(List<SelectListItem>)ViewBag.city, new{ @class="form-control"})
-*@                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputPassword4">Şifreniz</label>
-                       @Html.PasswordFor(x=>x.WriterPassword, new{ @class="form-control"})
-                        @Html.ValidationMessageFor(x=>x.WriterPassword,"", new{ @class="text-danger"})
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputPassword4">Şifrenizi Tekrar Giriniz</label>
-                        @Html.PasswordFor(x=>x.ConfirmPassword, new{ @class="form-control"})
-                        @Html.ValidationMessageFor(x=>x.ConfirmPassword,"", new{ @class="text-danger"})
-
-                    </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail3">Şifre:</label>
+                    <input type="password" asp-for="@Model.password"  class="form-control">
+                </div>
                   
                     <div class="form-group">
                         <label>Görsel</label>
-                        <input type="file" name="img[]" class="file-upload-default">
+                        <input type="file" asp-for="@Model.image"  class="file-upload-default">
                         <div class="input-group col-xs-12">
                             <input type="text" class="form-control file-upload-info" disabled placeholder="Upload Image">
                             <span class="input-group-append">
@@ -54,10 +44,6 @@
                         </div>
                     </div>
                   
-                    <div class="form-group">
-                        <label for="exampleTextarea1">Yazar Hakkında</label>
-                        @Html.TextAreaFor(x=>x.WriterAbout,10,3, new{ @class="form-control"})
-                    </div>
                     <button type="submit" class="btn btn-gradient-primary mr-2" >Gönder</button>
                    @* <script>
                         $("#alert").click((function)
@@ -66,8 +52,6 @@
                             })
                     </script>*@
                     <button class="btn btn-light">Vazgeç</button>
-                </form>
-
               
 
             </div>
