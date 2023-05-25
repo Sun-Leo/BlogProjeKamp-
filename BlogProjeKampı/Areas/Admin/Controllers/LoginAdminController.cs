@@ -45,5 +45,10 @@ namespace BlogProjeKampı.Areas.Admin.Controllers
             await _signInManager.SignOutAsync();
             return RedirectToAction("Index","LoginAdmin");
         }
+
+        public IActionResult AccessDenied()
+        {
+            return View();
+        }
     }
 }

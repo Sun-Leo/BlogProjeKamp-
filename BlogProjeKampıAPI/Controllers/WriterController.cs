@@ -17,7 +17,7 @@ namespace BlogProjeKampıAPI.Controllers
             return Ok(writer);
         }
         [HttpPost]
-        public IActionResult AddCategory(Writer writer)
+        public IActionResult AddWriter(Writer writer)
         {
             using var c = new Context();
             c.Add(writer);
@@ -25,7 +25,7 @@ namespace BlogProjeKampıAPI.Controllers
             return Ok();
         }
         [HttpGet("{id}")]
-        public IActionResult CategoryGetByID(int id)
+        public IActionResult WriterGetByID(int id)
         {
             using var c = new Context();
             var value = c.Writers.Find(id);
@@ -49,7 +49,7 @@ namespace BlogProjeKampıAPI.Controllers
             }
         }
         [HttpPut]
-        public IActionResult UpdateCategory(Writer writer)
+        public IActionResult UpdateWriter(Writer writer)
         {
             using var c = new Context();
             var value2 = c.Find<Writer>(writer.WriterID);

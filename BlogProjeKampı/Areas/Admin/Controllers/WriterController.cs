@@ -1,5 +1,6 @@
 ﻿using BlogProjeKampıAPI.DAL;
 using BusinessLayer.Abstract;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Collections.Generic;
@@ -10,6 +11,7 @@ using System.Threading.Tasks;
 namespace BlogProjeKampı.Areas.Admin.Controllers
 {
     [Area("Admin")]
+
     public class WriterController : Controller
     {
         public async Task<IActionResult> Index()

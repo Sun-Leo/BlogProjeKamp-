@@ -1,0 +1,23 @@
+﻿@using EntityLayer.Concrete
+@model List<Message2>
+
+ @foreach (var item in Model)
+    {
+<div>
+    <h4>Mesajlar <span class="badge badge-info float-right">16</span></h4>
+   
+        <div class="feed-element">
+            <a href="#" class="float-left">
+                <img alt="image" class="rounded-circle" src="~/AdminTema/img/a1.jpg">
+            </a>
+            <div class="media-body">
+                @item.Subject
+                <br>
+                <small class="text-muted">@(((DateTime)item.MessageDate).ToString("dd-MMM-yyyy"))</small>
+            </div>
+        </div>
+   
+
+
+</div>
+}

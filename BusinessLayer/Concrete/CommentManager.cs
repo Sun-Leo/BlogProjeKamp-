@@ -33,6 +33,11 @@ namespace BusinessLayer.Concrete
             return _commentDal.GetById(id);
         }
 
+        public List<Comment> TGetCommentWithBlog()
+        {
+            return _commentDal.GetCommentWithBlog();
+        }
+
         public List<Comment> TGetList()
         {
             return _commentDal.GetList();
